@@ -10,6 +10,7 @@ use Kiriunin\TinkoffBusinessApi\Schema\Types\BankStatement;
 class Accounts extends Base
 {
     /**
+     * @return Account[]
      * @throws GuzzleException
      */
     public function get(): array
