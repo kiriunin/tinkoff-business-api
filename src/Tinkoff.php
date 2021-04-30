@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 
 class Tinkoff
 {
-    public static function create(string $token, bool $isSandbox = false, LoggerInterface $logger = null): Client
+    public static function create(string $token, LoggerInterface $logger = null, bool $isSandbox = false): Client
     {
         return $isSandbox
             ? ClientFactory::createSandbox($token, $logger)
