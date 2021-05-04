@@ -33,6 +33,12 @@ use Kiriunin\TinkoffBusinessApi\Tinkoff;
 // Создать клиент с токеном
 $tinkoff = Tinkoff::create('YOUR_TOKEN');
 
+// Или создать Sandbox-клиент
+$tinkoff = Tinkoff::create('SANDBOX_TOKEN', true);
+
+// Так же, можно указать дополнительные опции Guzzle, например для Proxy
+$tinkoff = Tinkoff::create('YOUR_TOKEN', false, ['proxy' => 'http://localhost:8125']);
+
 // Сделать запрос на получение данных о компании и ее реквизитов
 $companyInn = $tinkoff->company()
                     ->get()
