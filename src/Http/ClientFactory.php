@@ -11,21 +11,21 @@ class ClientFactory
 
     private const URL_SANDBOX = 'https://business.tinkoff.ru/openapi/sandbox/api/';
 
-    public static function create(string $token, ?LoggerInterface $logger = null): Client
+    public static function create(string $token, array $guzzleOptions = [], ?LoggerInterface $logger = null,): Client
     {
-        return self::createClient($token, self::URL, $logger);
+        return self::createClient($token, self::URL, $guzzleOptions, $logger);
     }
 
-    public static function createSandbox(string $token, ?LoggerInterface $logger = null): Client
+    public static function createSandbox(string $token, array $guzzleOptions = [], ?LoggerInterface $logger = null): Client
     {
-        return self::createClient($token, self::URL_SANDBOX, $logger);
+        return self::createClient($token, self::URL_SANDBOX, $guzzleOptions, $logger);
     }
 
-    private static function createClient(string $token, string $baseUri, ?LoggerInterface $logger = null): Client
+    private static function createClient(string $token, string $baseUri, array $guzzleOptions = [], ?LoggerInterface $logger = null): Client
     {
-        $httpClient = new HttpClient([
-            'base_uri' => $baseUri
-        ]);
+        $options = array_merge($guzzleOptions, ['base_uri' => $baseUri]);
+
+        $httpClient = new HttpClient($options);
 
         $deserializer = ResponseDeserializerFactory::create();
 
