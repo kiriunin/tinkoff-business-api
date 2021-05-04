@@ -7,6 +7,11 @@ use Kiriunin\TinkoffBusinessApi\Schema\Entity;
 class BankStatement extends Entity
 {
     /**
+     * @var BankStatementOperation[]|null $operation
+     */
+    private ?array $operation = null;
+
+    /**
      * @param BankStatementOperation[]|null $operation
      */
     public function __construct(
@@ -15,9 +20,10 @@ class BankStatement extends Entity
         private float $income,
         private float $outcome,
         private float $saldoOut,
-        private ?array $operation = null
+        ?array $operation = null
     )
     {
+        $this->operation = $operation;
     }
 
     public function getAccountNumber(): string
