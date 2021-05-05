@@ -9,8 +9,8 @@ class BankStatementRequest extends Entity
 {
     public const DATE_FORMAT = 'Y-m-d';
 
-    private ?string $from;
-    private ?string $till;
+    private ?string $from = null;
+    private ?string $till = null;
 
     public function __construct(
         private string $accountNumber,
@@ -18,8 +18,13 @@ class BankStatementRequest extends Entity
         ?DateTime $till = null
     )
     {
-        $this->from = $from->format(self::DATE_FORMAT);
-        $this->till = $till->format(self::DATE_FORMAT);
+        if ($from) {
+            $this->setFrom($from);
+        }
+
+        if ($till) {
+            $this->setTill($till);
+        }
     }
 
     public function getAccountNumber(): string
@@ -37,7 +42,7 @@ class BankStatementRequest extends Entity
         return $this->from;
     }
 
-    public function setFrom(?DateTime $from): void
+    public function setFrom(DateTime $from): void
     {
         $this->from = $from->format(self::DATE_FORMAT);
     }
@@ -47,7 +52,7 @@ class BankStatementRequest extends Entity
         return $this->till;
     }
 
-    public function setTill(?DateTime $till): void
+    public function setTill(DateTime $till): void
     {
         $this->till = $till->format(self::DATE_FORMAT);
     }
