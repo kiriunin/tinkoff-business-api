@@ -58,7 +58,7 @@ $tinkoff = Tinkoff::create('YOUR_TOKEN');
 $request = new BankStatementRequest('ACCOUNT_ID');
 
 // Установить сегодняшнюю дату 
-$request->setFrom((new DateTime())->format('Y-m-d'));
+$request->setFrom(new DateTime());
 
 // Сделать запрос на получение выписки по счету
 $statement = $tinkoff->accounts()->statement($request);
