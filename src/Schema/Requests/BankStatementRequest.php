@@ -2,14 +2,17 @@
 
 namespace Kiriunin\TinkoffBusinessApi\Schema\Requests;
 
+use DateTime;
 use Kiriunin\TinkoffBusinessApi\Schema\Entity;
 
 class BankStatementRequest extends Entity
 {
+    public const DATE_FORMAT = 'Y-m-d';
+
     public function __construct(
         private string $accountNumber,
-        private ?string $from = null,
-        private ?string $till = null
+        private ?DateTime $from = null,
+        private ?DateTime $till = null
     )
     {
     }
@@ -26,20 +29,20 @@ class BankStatementRequest extends Entity
 
     public function getFrom(): ?string
     {
-        return $this->from;
+        return $this->from->format(self::DATE_FORMAT);
     }
 
-    public function setFrom(?string $from): void
+    public function setFrom(?DateTime $from): void
     {
         $this->from = $from;
     }
 
     public function getTill(): ?string
     {
-        return $this->till;
+        return $this->till->format(self::DATE_FORMAT);
     }
 
-    public function setTill(?string $till): void
+    public function setTill(?DateTime $till): void
     {
         $this->till = $till;
     }
